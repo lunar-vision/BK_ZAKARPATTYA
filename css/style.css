@@ -1343,7 +1343,7 @@ footer .footer__container .footer__bottom .footer__bottom-text {
   .services .services__container .services__list .services__item .services__item-link .services__item-text::after {
     width: 22px;
     height: 22px;
-    top: 249px;
+    top: 251px;
   }
   .about {
     padding-left: 30px;
@@ -2372,6 +2372,9 @@ footer .footer__container .footer__bottom .footer__bottom-text {
     display: flex;
     flex-direction: column;
     place-items: center;
+  }
+  .services .services__container .services__list .services__item .services__item-link .services__item-text::after {
+    top: 252px;
   }
   .gallery .gallery__container .gallery__wrap {
     max-width: 355px;
