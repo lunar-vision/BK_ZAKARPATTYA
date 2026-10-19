@@ -325,7 +325,11 @@
 	<noscript>
 		<link rel="stylesheet" href="css/style.css">
 	</noscript>
-	<link rel="stylesheet" href="css/vendor/swiper-bundle.min.css" />
+	<link rel="preload" href="css/vendor/swiper-bundle.min.css" as="style"
+		onload="this.onload=null;this.rel='stylesheet'">
+	<noscript>
+		<link rel="stylesheet" href="css/vendor/swiper-bundle.min.css">
+	</noscript>
 	<link rel="preload" as="image" href="img/hero_img.webp"
 		imagesrcset="img/hero_img-alt.webp 1440w, img/hero_img.webp 1920w" type="image/webp" imagesizes="100vw">
 
