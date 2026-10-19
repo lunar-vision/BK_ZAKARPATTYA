@@ -1063,8 +1063,47 @@
 		</div>
 	</footer>
 
-	<script src="js/vendor/swiper-bundle.min.js"></script>
 	<script src="js/scripts.js"></script>
+	<script>
+		(function () {
+			function initSwipers() {
+				if (typeof window.initSwipers === 'function') {
+					window.initSwipers();
+				}
+			}
+
+			function loadSwiper() {
+				if (document.querySelector('.swiper')) {
+					var script = document.createElement('script');
+					script.src = 'js/vendor/swiper-bundle.min.js';
+					script.onload = initSwipers;
+					document.body.appendChild(script);
+				}
+			}
+
+			if ('IntersectionObserver' in window) {
+				var observer = new IntersectionObserver(function (entries) {
+					entries.forEach(function (entry) {
+						if (entry.isIntersecting) {
+							observer.unobserve(entry.target);
+							loadSwiper();
+						}
+					});
+				}, { rootMargin: '200px 0px 400px 0px' });
+
+				var swiperContainers = document.querySelectorAll('.swiper');
+				if (swiperContainers.length > 0) {
+					swiperContainers.forEach(function (el) {
+						observer.observe(el);
+					});
+				} else {
+					loadSwiper();
+				}
+			} else {
+				loadSwiper();
+			}
+		})();
+	</script>
 	<script type="application/ld+json">
     {
         "@context": "https://schema.org",

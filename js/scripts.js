@@ -1,61 +1,67 @@
-// swiperGallery
-const swiper = window.Swiper
-	? new Swiper('.swiperGallery', {
-		loop: true,
-		slidesPerView: 1,
-		observer: false,
-		observeParents: false,
-		autoplay: {
-			delay: 5000,
+window.initSwipers = function () {
+	if (window.swiperGalleryInit) return;
+	window.swiperGalleryInit = true;
+
+	if (!window.Swiper) return;
+
+	var gallery = document.querySelector('.swiperGallery');
+	if (gallery) {
+		new Swiper('.swiperGallery', {
+			loop: true,
+			slidesPerView: 1,
+			observer: false,
+			observeParents: false,
+			autoplay: {
+				delay: 5000,
+				speed: 1011,
+			},
 			speed: 1011,
-		},
-		speed: 1011,
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-			addIcons: false,
-		},
-		a11y: {
-			enabled: true,
-			prevSlideMessage: 'Попередній слайд',
-			nextSlideMessage: 'Наступний слайд',
-			firstSlideMessage: 'Це перший слайд',
-			lastSlideMessage: 'Це останній слайд',
-		},
-	})
-	: null;
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+				addIcons: false,
+			},
+			a11y: {
+				enabled: true,
+				prevSlideMessage: 'Попередній слайд',
+				nextSlideMessage: 'Наступний слайд',
+				firstSlideMessage: 'Це перший слайд',
+				lastSlideMessage: 'Це останній слайд',
+			},
+		});
+	}
 
-// swiperCertificates
-const swiperС = window.Swiper
-	? new Swiper('.swiperCertificates', {
-		breakpoints: {
-			1200: {
-				slidesPerView: 2,
+	var certs = document.querySelector('.swiperCertificates');
+	if (certs) {
+		new Swiper('.swiperCertificates', {
+			breakpoints: {
+				1200: {
+					slidesPerView: 2,
+				},
+				1600: {
+					slidesPerView: 3,
+				},
+				1920: {
+					slidesPerView: 4,
+				},
 			},
-			1600: {
-				slidesPerView: 3,
+			observer: false,
+			observeParents: false,
+			spaceBetween: 60,
+			touchEventsTarget: "container",
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
 			},
-			1920: {
-				slidesPerView: 4,
+			a11y: {
+				enabled: true,
+				paginationBulletMessage: 'Перейти до слайда {{index}}',
+				firstSlideMessage: 'Це перший слайд',
+				lastSlideMessage: 'Це останній слайд',
 			},
-		},
-		observer: false,
-		observeParents: false,
-		spaceBetween: 60,
-		touchEventsTarget: "container",
-		pagination: {
-			el: '.swiper-pagination',
-			clickable: true,
-		},
-		a11y: {
-			enabled: true,
-			paginationBulletMessage: 'Перейти до слайда {{index}}',
-			firstSlideMessage: 'Це перший слайд',
-			lastSlideMessage: 'Це останній слайд',
-		},
-	})
-	: null;
-
+		});
+	}
+};
 
 //smth-logo
 //url-#cleaner
