@@ -215,54 +215,62 @@ document.addEventListener('keydown', function (e) {
 });
 
 
+let resizeTimer;
 window.addEventListener('resize', function () {
-	if (window.innerWidth > 1032) {
-		closeMenu();
-	}
+	clearTimeout(resizeTimer);
+	resizeTimer = setTimeout(function () {
+		if (window.innerWidth > 1032) {
+			closeMenu();
+		}
+	}, 150);
 });
 
 
 
 //order__form-settings
-document.querySelector('form').reset();
-
+const form = document.querySelector('form');
 const input = document.querySelector('input[name="phone"]');
 const nameInput = document.querySelector('input[name="name"]');
 
+if (form) form.reset();
 
-input.addEventListener('focus', () => {
-	if (!input.value) {
-		input.value = '+380';
-	}
-});
-
-input.addEventListener('blur', () => {
-	if (input.value === '+380') {
-		input.value = '';
-	}
-});
-
-input.addEventListener('beforeinput', (e) => {
-	if (e.inputType === 'deleteContentBackward' || e.inputType === 'deleteContentForward') {
-		const val = input.value;
-		if (val === '+380' || val.length <= 4) {
-			e.preventDefault();
+if (input) {
+	input.addEventListener('focus', () => {
+		if (!input.value) {
+			input.value = '+380';
 		}
-	}
-});
+	});
 
-input.addEventListener('input', () => {
-	let val = input.value.replace(/[^+\d]/g, '');
-	if (!val.startsWith('+380')) {
-		val = '+380' + val.replace('+380', '');
-	}
-	if (val === '+') val = '+380';
-	input.value = val;
-});
+	input.addEventListener('blur', () => {
+		if (input.value === '+380') {
+			input.value = '';
+		}
+	});
 
-nameInput.addEventListener('input', () => {
-	nameInput.value = nameInput.value.replace(/[^a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\s'-]/g, '');
-});
+	input.addEventListener('beforeinput', (e) => {
+		if (e.inputType === 'deleteContentBackward' || e.inputType === 'deleteContentForward') {
+			const val = input.value;
+			if (val === '+380' || val.length <= 4) {
+				e.preventDefault();
+			}
+		}
+	});
+
+	input.addEventListener('input', () => {
+		let val = input.value.replace(/[^+\d]/g, '');
+		if (!val.startsWith('+380')) {
+			val = '+380' + val.replace('+380', '');
+		}
+		if (val === '+') val = '+380';
+		input.value = val;
+	});
+}
+
+if (nameInput) {
+	nameInput.addEventListener('input', () => {
+		nameInput.value = nameInput.value.replace(/[^a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\s'-]/g, '');
+	});
+}
 
 
 //objects shown
@@ -301,7 +309,6 @@ function hideFormToast() {
 	toast.classList.remove('is-visible');
 }
 
-const form = document.querySelector('form');
 if (form) {
 	form.addEventListener('submit', async (e) => {
 		e.preventDefault();
@@ -320,10 +327,12 @@ if (form) {
 				showFormToast(UI[uiLang].success, true);
 				form.reset();
 			} else {
-				showFormToast(UI[uiLang].error + ': ' + res.status, false);
+				console.error('Server error:', res.status);
+				showFormToast(UI[uiLang].error, false);
 			}
 		} catch (err) {
-			showFormToast(UI[uiLang].error + ': ' + err, false);
+			console.error('Form submit error:', err);
+			showFormToast(UI[uiLang].error, false);
 		} finally {
 			if (submitBtn) submitBtn.disabled = false;
 		}
