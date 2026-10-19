@@ -3,6 +3,7 @@ const path = require("path");
 const { globSync } = require("glob");
 const CleanCSS = require("clean-css");
 const { minify } = require("html-minifier-terser");
+const { minify: minifyJs } = require("terser");
 
 const DIST_DIR = "dist";
 
@@ -18,6 +19,8 @@ const whitelist = new Set([
 	"menu-open",
 	"is-visible",
 	"is-success",
+	"is-loaded",
+	"fonts-loaded",
 
 	"swiper",
 	"swiper-wrapper",
@@ -28,6 +31,10 @@ const whitelist = new Set([
 	"swiper-pagination",
 	"swiper-pagination-bullet",
 	"swiper-pagination-bullet-active",
+	"swiper-slide-active",
+	"swiper-slide-next",
+	"swiper-slide-prev",
+	"swiper-button-disabled",
 
 	"swiperGallery",
 	"swiperCertificates",
@@ -62,12 +69,15 @@ function copyDir(from, to, basePath = "") {
 		".gitignore",
 		".github",
 		".htmlvalidate.json",
-		"class-map.json"
+		"class-map.json",
+		"css/style.css"
+
 	]);
 
 	function shouldCopy(relPath) {
 		if (excludePaths.has(relPath)) return false;
 		if (relPath.endsWith(".scss")) return false;
+		if (relPath.endsWith(".html")) return false;
 		return true;
 	}
 
@@ -244,10 +254,18 @@ async function build() {
 
 		let result = replaceClassesInHtml(html, classMap);
 
+
+		result = result.replace(/<style>([\s\S]*?)<\/style>/g, (match, cssContent) => {
+			const protectedCss = protectCssUrls(cssContent);
+			const obfuscatedCss = replaceClassesInCss(protectedCss.css, classMap);
+			const restoredCss = restoreCssUrls(obfuscatedCss, protectedCss.urls);
+			return `<style>${new CleanCSS({ level: 2 }).minify(restoredCss).styles}</style>`;
+		});
+
 		result = await minify(result, {
 			collapseWhitespace: true,
 			removeComments: true,
-			minifyCSS: true,
+			minifyCSS: false,
 			minifyJS: true,
 			collapseBooleanAttributes: false,
 			removeAttributeQuotes: false,
@@ -257,6 +275,21 @@ async function build() {
 	}
 
 	copyDir(".", DIST_DIR, "");
+
+	const jsFiles = globSync("js/**/*.js").filter(
+		(file) => !file.endsWith(".min.js") && !file.includes("build.js"),
+	);
+
+	for (const jsFile of jsFiles) {
+		const code = fs.readFileSync(jsFile, "utf8");
+		const result = await minifyJs(code, {
+			compress: true,
+			mangle: {
+				reserved: ["toggleMenu", "closeMenu", "hideFormToast", "gtag"],
+			},
+		});
+		fs.writeFileSync(path.join(DIST_DIR, jsFile), result.code);
+	}
 
 	// class-map.json создаётся в корне проекта, а НЕ в dist
 	fs.writeFileSync(
