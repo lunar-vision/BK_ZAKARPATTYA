@@ -3,6 +3,8 @@ const swiper = window.Swiper
 	? new Swiper('.swiperGallery', {
 		loop: true,
 		slidesPerView: 1,
+		observer: false,
+		observeParents: false,
 		autoplay: {
 			delay: 5000,
 			speed: 1011,
@@ -37,6 +39,8 @@ const swiperС = window.Swiper
 				slidesPerView: 4,
 			},
 		},
+		observer: false,
+		observeParents: false,
 		spaceBetween: 60,
 		touchEventsTarget: "container",
 		pagination: {
@@ -112,10 +116,12 @@ function scrollToElement(target) {
 		return;
 	}
 
-	const marginTop =
-		parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-	const y = target.getBoundingClientRect().top + window.scrollY - marginTop;
-	smoothScrollTo(y);
+	requestAnimationFrame(() => {
+		const rect = target.getBoundingClientRect();
+		const marginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+		const y = rect.top + window.scrollY - marginTop;
+		smoothScrollTo(y);
+	});
 }
 
 function scrollToTop() {
