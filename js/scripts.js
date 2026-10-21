@@ -338,3 +338,44 @@ if (form) {
 		}
 	});
 }
+
+window.initMap = function () {
+	if (window.mapInit) return;
+	window.mapInit = true;
+
+	var mapContainer = document.querySelector('.contacts__map');
+	if (!mapContainer) return;
+
+	var iframe = document.createElement('iframe');
+	iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2647.8210776352394!2d22.718579877085062!3d48.42157923134618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4739adcca2d1bf13%3A0x10af86c105bc26a2!2z0KLQntCSICLQkS7Qmi7Ql9Cw0LrQsNGA0L_QsNGC0YLRjyI!5e0!3m2!1sru!2scz!4v1783876687220!5m2!1sru!2scz';
+	iframe.title = 'Карта розташування БК Закарпаття';
+	iframe.width = '504';
+	iframe.height = '504';
+	iframe.allowFullscreen = '';
+	iframe.referrerPolicy = 'no-referrer-when-downgrade';
+	iframe.style.border = '0';
+
+	mapContainer.appendChild(iframe);
+};
+
+if ('IntersectionObserver' in window) {
+	var mapObserver = new IntersectionObserver(function (entries) {
+		entries.forEach(function (entry) {
+			if (entry.isIntersecting) {
+				mapObserver.unobserve(entry.target);
+				window.initMap();
+			}
+		});
+	}, { rootMargin: '300px' });
+
+	var mapContainers = document.querySelectorAll('.contacts__map');
+	if (mapContainers.length > 0) {
+		mapContainers.forEach(function (el) {
+			mapObserver.observe(el);
+		});
+	} else {
+		window.initMap();
+	}
+} else {
+	window.initMap();
+}

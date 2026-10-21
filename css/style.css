@@ -1014,7 +1014,7 @@ header .header__container .header__list .header__item .header__item-link:hover {
 .contacts .contacts__container .contacts__content .contacts__map {
   border: 3px solid #38393e;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  height: 511px;
+  height: 510px;
   place-self: center;
 }
 .contacts .contacts__container .contacts__content .contacts__map iframe {
