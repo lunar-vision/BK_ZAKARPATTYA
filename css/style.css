@@ -3340,7 +3340,7 @@ body.fonts-loaded {
     max-width: calc(100% - 40px);
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card {
-    scroll-margin-top: 175px;
+    scroll-margin-top: 190px;
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info {
     padding: 20px 34px;
