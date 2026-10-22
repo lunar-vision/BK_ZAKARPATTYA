@@ -65,9 +65,11 @@ window.initSwipers = function () {
 
 //smth-logo
 //url-#cleaner
+//raf-anim
 (() => {
 	let scrollRafId = null;
 	let restoreScrollBehavior = null;
+	let scrollCompletion = null;
 
 	function cleanUrl() {
 		history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -85,10 +87,13 @@ window.initSwipers = function () {
 			cancelAnimationFrame(scrollRafId);
 			scrollRafId = null;
 			restoreNativeScrollBehavior();
+			const onComplete = scrollCompletion;
+			scrollCompletion = null;
+			onComplete?.();
 		}
 	}
 
-	function smoothScrollTo(targetY, duration = 600) {
+	function smoothScrollTo(targetY, duration = 600, target = null, marginTop = 0, onComplete = null) {
 		cancelScroll();
 
 		const el = document.scrollingElement || document.documentElement;
@@ -104,31 +109,42 @@ window.initSwipers = function () {
 			}
 		};
 
-		const maxY = Math.max(0, el.scrollHeight - window.innerHeight);
-		const destinationY = Math.min(Math.max(targetY, 0), maxY);
+		const getDestinationY = () => {
+			const maxY = Math.max(0, el.scrollHeight - window.innerHeight);
+			const currentTargetY = target
+				? target.getBoundingClientRect().top + el.scrollTop - marginTop
+				: targetY;
+			return Math.min(Math.max(currentTargetY, 0), maxY);
+		};
 		const startY = el.scrollTop;
-		const diff = destinationY - startY;
+		const diff = getDestinationY() - startY;
 
 		if (Math.abs(diff) < 1) {
-			el.scrollTop = destinationY;
+			el.scrollTop = getDestinationY();
 			restoreNativeScrollBehavior();
+			onComplete?.();
 			return;
 		}
 
+		scrollCompletion = onComplete;
 		let startTime = null;
 		const ease = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
 		function step(timestamp) {
 			if (!startTime) startTime = timestamp;
 			const progress = Math.min((timestamp - startTime) / duration, 1);
-			el.scrollTop = startY + diff * ease(progress);
+			const destinationY = getDestinationY();
+			el.scrollTop = startY + (destinationY - startY) * ease(progress);
 
 			if (progress < 1) {
 				scrollRafId = requestAnimationFrame(step);
 			} else {
-				el.scrollTop = destinationY;
+				el.scrollTop = getDestinationY();
 				scrollRafId = null;
 				restoreNativeScrollBehavior();
+				const completion = scrollCompletion;
+				scrollCompletion = null;
+				completion?.();
 			}
 		}
 
@@ -138,17 +154,17 @@ window.initSwipers = function () {
 	window.addEventListener('wheel', cancelScroll, { passive: true });
 	window.addEventListener('touchstart', cancelScroll, { passive: true });
 
-	function scrollToElement(target) {
+	function scrollToElement(target, onComplete) {
 		requestAnimationFrame(() => {
-			const rect = target.getBoundingClientRect();
 			const marginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-			const y = rect.top + (document.scrollingElement || document.documentElement).scrollTop - marginTop;
-			smoothScrollTo(y);
+			const el = document.scrollingElement || document.documentElement;
+			const y = target.getBoundingClientRect().top + el.scrollTop - marginTop;
+			smoothScrollTo(y, 600, target, marginTop, onComplete);
 		});
 	}
 
-	function scrollToTop() {
-		smoothScrollTo(0);
+	function scrollToTop(onComplete) {
+		smoothScrollTo(0, 600, null, 0, onComplete);
 	}
 
 	window.addEventListener('DOMContentLoaded', function () {
@@ -163,8 +179,7 @@ window.initSwipers = function () {
 
 		const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
 		fontsReady.then(() => {
-			scrollToElement(target);
-			cleanUrl();
+			scrollToElement(target, cleanUrl);
 		});
 	});
 
@@ -177,8 +192,7 @@ window.initSwipers = function () {
 
 		if (isHomePage) {
 			e.preventDefault();
-			scrollToTop();
-			cleanUrl();
+			scrollToTop(cleanUrl);
 		}
 	});
 
@@ -189,8 +203,7 @@ window.initSwipers = function () {
 			if (!target) return;
 
 			e.preventDefault();
-			scrollToElement(target);
-			cleanUrl();
+			scrollToElement(target, cleanUrl);
 		});
 	});
 })();

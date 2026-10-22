@@ -1290,8 +1290,8 @@ footer .footer__container .footer__bottom .footer__bottom-text {
   background: #38393e;
   border-radius: 20px;
   overflow: hidden;
-  scroll-margin-top: 130px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  scroll-margin-top: 330px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
 }
@@ -1955,6 +1955,9 @@ body.fonts-loaded {
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 46px;
   }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 310px;
+  }
   footer .footer__container {
     max-width: calc(100% - 80px);
   }
@@ -2085,6 +2088,9 @@ body.fonts-loaded {
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 46px;
   }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 275px;
+  }
 }
 @media (1024px <= width < 1280px) {
   #services {
@@ -2210,6 +2216,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 46px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 250px;
   }
   .concrete__production .production__container {
     max-width: calc(100% - 80px);
@@ -2406,6 +2415,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 40px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 240px;
   }
   .concrete-pump__page-wrapper .detailed__desc .desc__container {
     max-width: calc(100% - 40px);
@@ -2632,6 +2644,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 38px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 200px;
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info .detail__info-text {
     height: 78px;
@@ -2882,6 +2897,9 @@ body.fonts-loaded {
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 38px;
   }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 190px;
+  }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info .detail__info-text {
     height: 78px;
   }
@@ -3093,6 +3111,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 34px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 180px;
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info {
     padding: 20px 34px;
@@ -3318,6 +3339,9 @@ body.fonts-loaded {
   .detailed__desc .desc__container {
     max-width: calc(100% - 40px);
   }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 160px;
+  }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info {
     padding: 20px 34px;
   }
@@ -3541,6 +3565,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 32px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 150px;
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info {
     padding: 20px 34px;
@@ -3784,6 +3811,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 28px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 140px;
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info .uniq__button {
     font-size: 15px;
@@ -4067,6 +4097,9 @@ body.fonts-loaded {
   }
   .detailed__desc .desc__container .detailed__desc-title {
     font-size: 25px;
+  }
+  .detailed__desc .desc__container .detailed__desc-content .detail__card {
+    scroll-margin-top: 130px;
   }
   .detailed__desc .desc__container .detailed__desc-content .detail__card .detail__info {
     padding: 20px 23px;

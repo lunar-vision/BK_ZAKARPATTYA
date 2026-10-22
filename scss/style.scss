@@ -1445,8 +1445,8 @@ padding-bottom: env(safe-area-inset-bottom);
 				background: $main_color;
 				border-radius: 20px;
 				overflow: hidden;
-				scroll-margin-top: 130px;
 				box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+				scroll-margin-top: 330px;
 				transition:
 					transform 0.3s ease,
 					box-shadow 0.3s ease;
@@ -2389,6 +2389,11 @@ max-width: 1200px;
 			.detailed__desc-title {
 				font-size: 46px;
 			}
+			.detailed__desc-content{
+				.detail__card{
+					scroll-margin-top: 310px;
+				}
+			}
 		}
 	}
 
@@ -2607,6 +2612,11 @@ max-width: 1200px;
 			.detailed__desc-title{
 				font-size: 46px;
 			}
+			.detailed__desc-content{
+				.detail__card{
+					scroll-margin-top: 275px;
+				}
+			}
 		}
 	}
 }
@@ -2820,6 +2830,11 @@ max-width: 1200px;
 
 			.detailed__desc-title{
 				font-size: 46px;
+			}
+			.detailed__desc-content{
+				.detail__card{
+					scroll-margin-top: 250px;
+				}
 			}
 		}
 	}
@@ -3155,6 +3170,11 @@ max-width: 1200px;
 			max-width: calc(100% - 40px);
 			.detailed__desc-title {
 				font-size: 40px;
+			}
+			.detailed__desc-content{
+				.detail__card{
+					scroll-margin-top: 240px;
+				}
 			}
 		}
 	}
@@ -3506,6 +3526,7 @@ max-width: 1200px;
 			}
 			.detailed__desc-content {
 				.detail__card {
+					scroll-margin-top: 200px;
 					.detail__info {
 						.detail__info-text {
 							height: 78px;
@@ -3890,6 +3911,7 @@ max-width: 1200px;
 			}
 			.detailed__desc-content {
 				.detail__card {
+					scroll-margin-top: 190px;
 					.detail__info {
 						.detail__info-text {
 							height: 78px;
@@ -4227,6 +4249,7 @@ max-width: 1200px;
 			}
 			.detailed__desc-content{
 				.detail__card{
+					scroll-margin-top: 180px;
 					.detail__info{
 						padding: 20px 34px;
 						.detail__info-title{
@@ -4569,6 +4592,7 @@ max-width: 1200px;
 			max-width: calc(100% - 40px);
 			.detailed__desc-content {
 				.detail__card {
+					scroll-margin-top: 160px;
 					.detail__info {
 						padding: 20px 34px;
 						.uniq__button {
@@ -4920,6 +4944,7 @@ max-width: 1200px;
 			}
 			.detailed__desc-content {
 				.detail__card {
+					scroll-margin-top: 150px;
 					.detail__info {
 						padding: 20px 34px;
 						.uniq__button {
@@ -5265,6 +5290,7 @@ max-width: 1200px;
 			}
 			.detailed__desc-content {
 				.detail__card {
+					scroll-margin-top: 140px;
 					.detail__info {
 						.uniq__button {
 							font-size: 15px;
@@ -5662,6 +5688,7 @@ max-width: 1200px;
 			}
 			.detailed__desc-content{
 				.detail__card{
+					scroll-margin-top: 130px;
 					.detail__info{
 						padding: 20px 23px;
 						.detail__info-text{
