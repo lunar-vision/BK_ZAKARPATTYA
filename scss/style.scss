@@ -1649,8 +1649,6 @@ body {
 	}
 }
 
-// Заглушки под картинки (видны только во время загрузки)
-
 .header__logo-img, .hero__img, .detail__media-img, .mark__card-img, .certificates__item-img, .gallery__item-img, .services__item-img, .hero__img {
 	background-color: transparent;
 }
@@ -4477,7 +4475,7 @@ max-width: 1200px;
 						}
 						&:first-of-type {
 							svg {
-								width: 39px;
+								width: 38px;
 							}
 						}
 												&:nth-of-type(2){
