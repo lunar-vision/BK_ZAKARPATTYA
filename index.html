@@ -23,13 +23,13 @@
 	<meta name="google-site-verification" content="atNlIbASNtJUHQRYba5v7OuLl4c1J1bMZiozPI204QE" />
 	<link rel="canonical" href="https://beton-zakarpattya.com.ua">
 	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+	<link rel="icon" type="image/svg+xml" href="img/favicon-google.svg">
 	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 	<link rel="preconnect" href="https://www.googletagmanager.com">
 	<link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
 	<link rel="preconnect" href="https://ad.doubleclick.net" crossorigin>
-
 	<link rel="preload" href="fonts/ubuntu/ubuntu-v21-cyrillic_latin-700.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="fonts/roboto/roboto-v51-cyrillic_latin-regular.woff2" as="font" type="font/woff2"
 		crossorigin>
@@ -438,8 +438,23 @@
 	<noscript>
 		<link rel="stylesheet" href="css/vendor/swiper-bundle.min.css">
 	</noscript>
-	<link rel="preload" as="image" href="img/hero_img.webp" fetchpriority="high"
-		imagesrcset="img/hero_img-alt.webp 1440w, img/hero_img.webp 1920w" type="image/webp" imagesizes="100vw">
+	<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(max-width: 1439px)"
+		href="img/hero-480.webp" imagesrcset="img/hero-280.webp 280w,
+                   img/hero-480.webp 480w,
+                   img/hero-720.webp 720w,
+                   img/hero_img-alt.webp 888w" imagesizes="(max-width: 280px) 240px,
+                  (max-width: 320px) 280px,
+                  (max-width: 360px) 320px,
+                  (max-width: 375px) 335px,
+                  (max-width: 390px) 350px,
+                  (max-width: 440px) 370px,
+                  (max-width: 600px) 459px,
+                  (max-width: 744px) 577px,
+                  (max-width: 1024px) 840px,
+                  888px">
+
+	<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(min-width: 1440px)"
+		href="img/hero_img.webp">
 
 </head>
 
