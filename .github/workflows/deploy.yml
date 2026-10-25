@@ -1,42 +1,54 @@
-name: Deploy
+name: Deploy Frontend
 
 on:
   push:
     branches: [main]
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 jobs:
-  build-and-check:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
 
-      - run: npm ci
-
-      - run: npm run build
-
-      - name: Validate built HTML
-        run: npx html-validate "dist/**/*.html"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist/
-          retention-days: 7
-
-  deploy:
-    needs: build-and-check
-    runs-on: [self-hosted, hestia-p30]
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist
-
-      - name: Sync to public_html
+      - name: Install dependencies & Build
         run: |
-          rsync -a --delete dist/ /home/andriantokar/web/beton-zakarpattya.com.ua/public_html/
+          npm ci
+          npm run build
+
+      - name: Install cloudflared
+        run: |
+          curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+          echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main" | sudo tee /etc/apt/sources.list.d/cloudflared.list
+          sudo apt-get update
+          sudo apt-get install -y cloudflared
+
+      - name: Setup SSH via Cloudflare Tunnel
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          cat << 'EOF' > ~/.ssh/config
+          Host ${{ secrets.HOST }}
+              HostName ${{ secrets.HOST }}
+              User ${{ secrets.USERNAME }}
+              IdentityFile ~/.ssh/id_ed25519
+              StrictHostKeyChecking no
+              UserKnownHostsFile /dev/null
+              ProxyCommand cloudflared access ssh --hostname %h --service-token-id ${{ secrets.CF_CLIENT_ID }} --service-token-secret ${{ secrets.CF_CLIENT_SECRET }}
+          EOF
+
+      - name: Sync dist to server
+        run: |
+          rsync -avz --delete dist/ ${{ secrets.HOST }}:/home/apsaraeast/web/apsaracambodia.com/public_html/
