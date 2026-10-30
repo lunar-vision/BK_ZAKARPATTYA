@@ -43,6 +43,8 @@ const whitelist = new Set([
 	"header__burger",
 	"header__nav",
 	"header__overlay",
+
+	"contacts__map",
 ]);
 
 function ensureDir(dir) {

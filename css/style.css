@@ -260,7 +260,8 @@ header .header__container .header__list .header__item .header__item-link:hover {
   display: flex;
   gap: 14px;
 }
-.hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--order, .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--prices {
+.hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--order,
+.hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--prices {
   max-width: 194px;
 }
 .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--order {
@@ -1461,7 +1462,14 @@ body.fonts-loaded {
   opacity: 1;
 }
 
-.header__logo-img, .hero__img, .detail__media-img, .mark__card-img, .certificates__item-img, .gallery__item-img, .services__item-img, .hero__img {
+.header__logo-img,
+.hero__img,
+.detail__media-img,
+.mark__card-img,
+.certificates__item-img,
+.gallery__item-img,
+.services__item-img,
+.hero__img {
   background-color: transparent;
 }
 
@@ -2132,6 +2140,9 @@ body.fonts-loaded {
   }
   footer .footer__container .footer__content .footer__phone {
     font-size: 30px;
+  }
+  .hero .hero__container {
+    max-width: calc(100% - 80px);
   }
   .about .about__container {
     max-width: calc(100% - 80px);
@@ -3226,11 +3237,13 @@ body.fonts-loaded {
   .gallery .gallery__container .gallery__wrap .swiperGallery .gallery__list.swiper-wrapper .gallery__item .gallery__item-img {
     max-height: 158px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next, .gallery .gallery__container .gallery__wrap .swiper-button-prev {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev {
     width: 40px;
     height: 40px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next svg, .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next svg,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
     width: 14px;
     height: 14px;
   }
@@ -3402,7 +3415,8 @@ body.fonts-loaded {
   .hero .hero__container .hero__content .hero__header .hero__desc {
     font-size: 14px;
   }
-  .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--order, .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--prices {
+  .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--order,
+  .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--prices {
     font-size: 12px;
   }
   .hero .hero__container .hero__content .hero__header .hero__buttons .hero__button--order {
@@ -3447,11 +3461,13 @@ body.fonts-loaded {
   .gallery .gallery__container .gallery__wrap .swiperGallery .gallery__list.swiper-wrapper .gallery__item .gallery__item-img {
     max-height: 153px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next, .gallery .gallery__container .gallery__wrap .swiper-button-prev {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev {
     width: 40px;
     height: 40px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next svg, .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next svg,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
     width: 14px;
     height: 14px;
   }
@@ -3689,11 +3705,13 @@ body.fonts-loaded {
   .gallery .gallery__container .gallery__wrap .swiperGallery .gallery__list.swiper-wrapper .gallery__item .gallery__item-img {
     max-height: 153px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next, .gallery .gallery__container .gallery__wrap .swiper-button-prev {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev {
     width: 38px;
     height: 38px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next svg, .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next svg,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
     width: 12px;
     height: 12px;
   }
@@ -3975,11 +3993,13 @@ body.fonts-loaded {
   .gallery .gallery__container .gallery__wrap .swiperGallery .gallery__list.swiper-wrapper .gallery__item .gallery__item-img {
     max-height: 153px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next, .gallery .gallery__container .gallery__wrap .swiper-button-prev {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev {
     width: 36px;
     height: 36px;
   }
-  .gallery .gallery__container .gallery__wrap .swiper-button-next svg, .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
+  .gallery .gallery__container .gallery__wrap .swiper-button-next svg,
+  .gallery .gallery__container .gallery__wrap .swiper-button-prev svg {
     width: 12px;
     height: 12px;
   }
